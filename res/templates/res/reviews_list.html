@@ -1,0 +1,108 @@
+{% extends "res/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h4 mb-0">Отзывы</h1>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal">Оставить отзыв</button>
+  </div>
+
+  {% if reviews %}
+    <div class="row g-3">
+      {% for r in reviews %}
+      <div class="col-12">
+        <div class="card shadow-sm">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <!-- Аватарка: круг с первой буквой, только Bootstrap-утилиты -->
+            <div class="flex-shrink-0">
+              <div class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center"
+                   style="width:48px;height:48px;font-weight:700;">
+                {{ r.author|slice:":1"|upper }}
+              </div>
+            </div>
+
+            <!-- Контент отзыва -->
+            <div class="flex-grow-1">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <h5 class="mb-0">{{ r.author }}</h5>
+                  <small class="text-muted">{{ r.created_at|date:"d.m.Y H:i" }}</small>
+                </div>
+                <div class="text-end">
+                  {% if r.dish %}
+                    <a href="{% url 'res:dish_detail' r.dish.pk %}" class="badge bg-light text-decoration-none small">Блюдо: {{ r.dish.name_dish }}</a>
+                  {% endif %}
+                  {% if r.rating %}
+                    <div class="mt-1" aria-hidden="true">
+                      {% for i in "12345" %}
+                        {% if forloop.counter <= r.rating %}
+                          <span class="fs-6 text-warning">★</span>
+                        {% else %}
+                          <span class="fs-6 text-muted">☆</span>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+
+              <p class="mt-2 mb-0">{{ r.text|linebreaks }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="text-center py-5 text-muted">
+      <p class="mb-1">Пока нет отзывов.</p>
+      <p class="small">Будьте первым — расскажите о своём опыте!</p>
+      <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#reviewModal">Оставить отзыв</button>
+    </div>
+  {% endif %}
+</div>
+
+<!-- Модальное окно для отправки отзыва -->
+<div class="modal fade" id="reviewModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form method="post" action="{% url 'res:review_create' %}">
+        {% csrf_token %}
+        <div class="modal-header">
+          <h5 class="modal-title">Оставить отзыв</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+        </div>
+        <div class="modal-body">
+          {{ form.non_field_errors }}
+          <div class="mb-2">
+            <label class="form-label">Ваше имя</label>
+            {{ form.author }}
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Email (необязательно)</label>
+            {{ form.email }}
+          </div>
+          <div class="mb-2">
+            <label class="form-label">Рейтинг</label>
+            {{ form.rating }}
+          </div>
+          <div class="mb-2">
+                      <label class="form-label">Текст отзыва</label>
+            {{ form.text }}
+          </div>
+          {{ form.dish }}
+          <div class="form-text small text-muted">Ваш отзыв появится после модерации.</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-link" data-bs-dismiss="modal">Отмена</button>
+          <button type="submit" class="btn btn-primary">Отправить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+

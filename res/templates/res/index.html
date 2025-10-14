@@ -1,0 +1,311 @@
+{% extends "res/base.html" %}
+{% load static %}
+{% block title %}Главная — Maple Leaf{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+
+  <div class="row align-items-center mb-5">
+    <div class="col-lg-7">
+     <div class="p-4 p-lg-5 bg-gradient-elegant text-white rounded-3 shadow-lg position-relative overflow-hidden">
+        <div class="position-relative z-1">
+          <h1 class="display-5 fw-bold mb-3">Maple Leaf — ресторан в Ванкувере</h1>
+          <p class="lead mb-3" id="about">{{ about_text }}</p>
+          <p class="mb-4 opacity-90">Аутентичные канадские блюда, уютная атмосфера и лучшие морепродукты региона. Приглашаем на ланч и вечерние дегустации.</p>
+          <div class="d-flex flex-wrap gap-3">
+            <a href="{% url 'res:menu' %}" class="btn btn-light btn-lg px-4 py-2 fw-semibold">Посмотреть меню</a>
+            <a href="{% url 'res:about' %}" class="btn btn-outline-light btn-lg px-4 py-2">О нас</a>
+          </div>
+        </div>
+        <div class="position-absolute top-0 end-0 w-50 h-100 bg-gradient-to-left opacity-10"></div>
+      </div>
+    </div>
+
+    <div class="col-lg-5 mt-4 mt-lg-0">
+      <div class="position-relative">
+        <img src="{% static 'images/hero.jpg' %}" class="img-fluid rounded-3 shadow-lg" alt="Maple Hero">
+        <div class="position-absolute bottom-0 start-0 m-3">
+          <span class="badge bg-success fs-6 p-2 shadow">★ 4.8/5 на TripAdvisor</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="mb-5">
+    <div class="text-center mb-5">
+      <h2 class="display-6 fw-bold text-dark mb-3">Забронируйте незабываемый вечер</h2>
+      <p class="lead text-muted mx-auto" style="max-width: 600px;">Насладитесь изысканной кухней в атмосфере канадского гостеприимства</p>
+    </div>
+
+    <div class="row align-items-center mb-5">
+      <div class="col-lg-4">
+        <div class="position-relative">
+          <img src="{% static 'images/restaurant1.jpg' %}" class="img-fluid rounded-3 shadow" alt="Интерьер ресторана">
+          <div class="position-absolute top-0 start-0 m-3">
+            <span class="badge bg-primary fs-6 p-2">🕒 Открыто до 23:00</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8 mt-4 mt-lg-0">
+        <div class="p-4 p-lg-5 bg-white rounded-3 shadow-sm border">
+          <h2 class="h3 fw-bold mb-3 text-gradient">Забронируйте столик онлайн</h2>
+          <p class="fs-5 mb-4">Хотите гарантированно получить лучший столик в нашем ресторане? Забронируйте заранее через нашу удобную онлайн-систему.</p>
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <div class="d-flex align-items-center mb-3">
+                <div class="bg-primary bg-opacity-10 p-2 rounded me-3">
+                  <i class="bi bi-calendar-check text-primary fs-5"></i>
+                </div>
+                <span>Выберите дату и время</span>
+              </div>
+              <div class="d-flex align-items-center mb-3">
+                <div class="bg-primary bg-opacity-10 p-2 rounded me-3">
+                  <i class="bi bi-envelope-check text-primary fs-5"></i>
+                </div>
+                <span>Подтверждение по email</span>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="d-flex align-items-center mb-3">
+                <div class="bg-primary bg-opacity-10 p-2 rounded me-3">
+                  <i class="bi bi-people text-primary fs-5"></i>
+                </div>
+                <span>Укажите количество гостей</span>
+              </div>
+              <div class="d-flex align-items-center mb-3">
+                <div class="bg-primary bg-opacity-10 p-2 rounded me-3">
+                  <i class="bi bi-arrow-clockwise text-primary fs-5"></i>
+                </div>
+                <span>Бесплатная отмена за 24 часа</span>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex flex-wrap gap-3 align-items-center">
+            <a href="{% url 'reservations:reservation' %}" class="btn btn-primary">Забронировать столик</a>
+            <span class="text-muted">Без предоплаты</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row align-items-center mb-5">
+      <div class="col-lg-8">
+        <div class="p-4 p-lg-5 bg-white rounded-3 shadow-sm border">
+          <h2 class="h3 fw-bold mb-3 text-gradient">Особые мероприятия</h2>
+          <p class="fs-5 mb-4">Планируете особое событие? Мы поможем организовать незабываемый вечер с индивидуальным подходом.</p>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="d-flex align-items-start mb-3">
+                <i class="bi bi-heart text-danger fs-5 me-3 mt-1"></i>
+                <div>
+                  <h5 class="fw-semibold mb-1">Романтические ужины</h5>
+                  <p class="text-muted small mb-0">Особые украшения и меню для влюбленных</p>
+                </div>
+              </div>
+              <div class="d-flex align-items-start mb-3">
+                <i class="bi bi-people-fill text-warning fs-5 me-3 mt-1"></i>
+                <div>
+                  <h5 class="fw-semibold mb-1">Семейные торжества</h5>
+                  <p class="text-muted small mb-0">Просторные зоны для больших компаний</p>
+                </div>
+              </div>
+              <div class="d-flex align-items-start mb-3">
+                <i class="bi bi-briefcase text-info fs-5 me-3 mt-1"></i>
+                <div>
+                  <h5 class="fw-semibold mb-1">Корпоративные мероприятия</h5>
+                  <p class="text-muted small mb-0">Профессиональная организация событий</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="d-flex align-items-start mb-3">
+                <i class="bi bi-balloon text-success fs-5 me-3 mt-1"></i>
+                <div>
+                  <h5 class="fw-semibold mb-1">Дни рождения и юбилеи</h5>
+                  <p class="text-muted small mb-0">Праздничные десерты и сюрпризы</p>
+                </div>
+              </div>
+              <div class="d-flex align-items-start mb-3">
+                <i class="bi bi-handshake text-primary fs-5 me-3 mt-1"></i>
+                <div>
+                  <h5 class="fw-semibold mb-1">Деловые встречи</h5>
+                  <p class="text-muted small mb-0">Тихые зоны для переговоров</p>
+                </div>
+              </div>
+              <div class="d-flex align-items-start mb-3">
+                <i class="bi bi-cup-straw text-purple fs-5 me-3 mt-1"></i>
+                <div>
+                  <h5 class="fw-semibold mb-1">Гастрономические дегустации</h5>
+                  <p class="text-muted small mb-0">Винные пары и меню от шефа</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4 p-3 bg-light rounded">
+            <p class="mb-0 fw-semibold">📞 Для мероприятий от 8 человек рекомендуем связаться с нашим менеджером по телефону +1 (604) 555-0123</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 mt-4 mt-lg-0">
+        <div class="position-relative">
+          <img src="{% static 'images/restaurant2.jpg' %}" class="img-fluid rounded-3 shadow" alt="Особые мероприятия">
+          <div class="position-absolute bottom-0 end-0 m-3">
+            <span class="badge bg-dark fs-6 p-2">🎉 До 50 гостей</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row align-items-center">
+      <div class="col-lg-4">
+        <div class="position-relative">
+          <img src="{% static 'images/restaurant3.jpg' %}" class="img-fluid rounded-3 shadow" alt="Преимущества бронирования">
+          <div class="position-absolute top-0 end-0 m-3">
+            <span class="badge bg-success fs-6 p-2">⭐ Премиум сервис</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8 mt-4 mt-lg-0">
+        <div class="p-4 p-lg-5 bg-white rounded-3 shadow-sm border">
+          <h2 class="h3 fw-bold mb-4 text-gradient">Почему стоит бронировать у нас</h2>
+          <div class="row g-4">
+            <div class="col-md-6">
+              <div class="d-flex align-items-start">
+                <div class="bg-primary bg-opacity-10 p-3 rounded-2 me-4">
+                  <i class="bi bi-clock-history text-primary fs-3"></i>
+                </div>
+                <div>
+                  <h5 class="fw-semibold mb-2">Экономия времени</h5>
+                  <p class="text-muted mb-0">Не ждите в очереди — ваш столик будет готов к назначенному времени.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="d-flex align-items-start">
+                <div class="bg-primary bg-opacity-10 p-3 rounded-2 me-4">
+                  <i class="bi bi-geo-alt text-primary fs-3"></i>
+                </div>
+                <div>
+                  <h5 class="fw-semibold mb-2">Лучшие места</h5>
+                  <p class="text-muted mb-0">Забронировав заранее, вы получаете столик в желаемой зоне ресторана.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="d-flex align-items-start">
+                <div class="bg-primary bg-opacity-10 p-3 rounded-2 me-4">
+                  <i class="bi bi-gift text-primary fs-3"></i>
+                </div>
+                <div>
+                  <h5 class="fw-semibold mb-2">Специальные предложения</h5>
+                  <p class="text-muted mb-0">Гости с бронированием получают сезонные угощения от шефа.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="d-flex align-items-start">
+                <div class="bg-primary bg-opacity-10 p-3 rounded-2 me-4">
+                  <i class="bi bi-arrow-left-right text-primary fs-3"></i>
+                </div>
+                <div>
+                  <h5 class="fw-semibold mb-2">Гибкие изменения</h5>
+                  <p class="text-muted mb-0">Легко изменить или отменить бронь через личный кабинет.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-5">
+    <div class="text-center mb-5">
+      <h2 class="display-6 fw-bold text-dark mb-3">Ванкувер — город вдохновения</h2>
+      <p class="lead text-muted mx-auto" style="max-width: 600px;">Наш ресторан расположен в сердце города — рядом с морем, парками и живой культурной сценой.</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm overflow-hidden hover-lift">
+          <div class="card-img-top overflow-hidden">
+            <img src="{% static 'images/vancouver1.jpg' %}" class="img-fluid w-100" alt="Vancouver 1" style="height: 200px; object-fit: cover;">
+          </div>
+          <div class="card-body p-4">
+            <h5 class="card-title fw-semibold">Океанский вид и свежие продукты</h5>
+            <p class="card-text text-muted">Наши блюда готовятся из самых свежих морепродуктов, доставленных прямо с местных рынков.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm overflow-hidden hover-lift">
+          <div class="card-img-top overflow-hidden">
+            <img src="{% static 'images/vancouver2.jpg' %}" class="img-fluid w-100" alt="Vancouver 2" style="height: 200px; object-fit: cover;">
+          </div>
+          <div class="card-body p-4">
+            <h5 class="card-title fw-semibold">Прогулки по набережной</h5>
+            <p class="card-text text-muted">После ужина насладитесь романтической прогулкой по знаменитой набережной Ванкувера.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm overflow-hidden hover-lift">
+          <div class="card-img-top overflow-hidden">
+            <img src="{% static 'images/vancouver3.jpg' %}" class="img-fluid w-100" alt="Vancouver 3" style="height: 200px; object-fit: cover;">
+          </div>
+          <div class="card-body p-4">
+            <h5 class="card-title fw-semibold">Локальные рынки и фермеры</h5>
+            <p class="card-text text-muted">Мы сотрудничаем с местными фермерами, чтобы предложить вам самые качественные продукты.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<style>
+.bg-gradient-primary {
+  background: linear-gradient(135deg, #2c5aa0 0%, #1e3a8a 100%);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #2c5aa0 0%, #1e3a8a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+}
+
+.bg-gradient-to-left {
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 100%);
+}
+
+.text-purple {
+  color: #6f42c1;
+}
+
+.bg-purple {
+  background-color: #6f42c1;
+}
+
+
+.bg-gradient-elegant {
+  background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+}
+
+
+}
+</style>
+{% endblock %}
+
+
+

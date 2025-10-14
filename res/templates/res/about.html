@@ -1,0 +1,57 @@
+{# res/templates/res/about.html #}
+{% extends 'res/base.html' %}
+{% load static %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row align-items-center mb-4">
+    <div class="col-md-6">
+      <h1 class="display-5">О нашем ресторане</h1>
+      <p class="lead">{{ about_text }}</p>
+      <p>
+        Мы рады видеть вас каждый день — завтрак, обед и ужин. Закажите столик или приходите просто так,
+        чтобы насладиться атмосферой и авторской кухней.
+      </p>
+      <a href="{% url 'res:menu' %}" class="btn btn-primary btn-lg mt-2">Посмотреть меню</a>
+    </div>
+
+    <div class="col-md-6">
+      <div id="aboutCarousel" class="carousel slide shadow-sm" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          {% for img in about_images %}
+          <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            <img src="{% static img %}" class="d-block w-100 rounded" alt="Фото ресторана {{ forloop.counter }}">
+          </div>
+          {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#aboutCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Назад</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#aboutCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Вперёд</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row g-3">
+    {% for img in about_images %}
+        <div class="col-6 col-md-4 col-lg-2">
+      <a href="#" data-bs-toggle="modal" data-bs-target="#aboutModal" data-img="{% static img %}" class="d-block">
+        <img src="{% static img %}" class="img-fluid rounded shadow-sm" alt="Фото {{ forloop.counter }}">
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+
+{% endblock %}
+
+
+
+
