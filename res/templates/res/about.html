@@ -1,57 +1,339 @@
-{# res/templates/res/about.html #}
 {% extends 'res/base.html' %}
 {% load static %}
 
-{% block title %}{{ page_title }}{% endblock %}
+{% block title %}О ресторане "Канадский клен"{% endblock %}
 
 {% block content %}
-<div class="container py-5">
-  <div class="row align-items-center mb-4">
-    <div class="col-md-6">
-      <h1 class="display-5">О нашем ресторане</h1>
-      <p class="lead">{{ about_text }}</p>
-      <p>
-        Мы рады видеть вас каждый день — завтрак, обед и ужин. Закажите столик или приходите просто так,
-        чтобы насладиться атмосферой и авторской кухней.
-      </p>
-      <a href="{% url 'res:menu' %}" class="btn btn-primary btn-lg mt-2">Посмотреть меню</a>
-    </div>
-
-    <div class="col-md-6">
-      <div id="aboutCarousel" class="carousel slide shadow-sm" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          {% for img in about_images %}
-          <div class="carousel-item {% if forloop.first %}active{% endif %}">
-            <img src="{% static img %}" class="d-block w-100 rounded" alt="Фото ресторана {{ forloop.counter }}">
-          </div>
-          {% endfor %}
+<div class="hero-section bg-light py-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <h1 class="display-4 fw-bold text-primary mb-4">Канадский клен</h1>
+        <p class="lead fs-4">Там, где встречаются канадское гостеприимство и изысканная кухня</p>
+        <p class="text-muted mb-4">С 2018 года мы создаем незабываемые гастрономические впечатления в самом сердце города</p>
+        <div class="mt-4">
+          <a href="{% url 'reservations:reservation' %}" class="btn btn-primary btn-lg me-3">Забронировать стол</a>
+          <a href="{% url 'res:menu' %}" class="btn btn-outline-primary btn-lg">Посмотреть меню</a>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#aboutCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Назад</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#aboutCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Вперёд</span>
-        </button>
+      </div>
+      <div class="col-lg-6">
+        <div id="mainCarousel" class="carousel slide shadow-lg rounded-3" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            {% for img in about_images|slice:":3" %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+              <img src="{% static img %}" class="d-block w-100 rounded-3" style="height: 400px; object-fit: cover;" alt="Ресторан {{ forloop.counter }}">
+            </div>
+            {% endfor %}
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Назад</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Вперёд</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
-  <div class="row g-3">
-    {% for img in about_images %}
-        <div class="col-6 col-md-4 col-lg-2">
-      <a href="#" data-bs-toggle="modal" data-bs-target="#aboutModal" data-img="{% static img %}" class="d-block">
-        <img src="{% static img %}" class="img-fluid rounded shadow-sm" alt="Фото {{ forloop.counter }}">
-      </a>
+</div>
+<section class="py-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
+        <img src="{% static 'images/history.jpg' %}" class="img-fluid rounded-3 shadow" alt="Ресторан Canadian Maple в Ванкувере" style="height: 450px; object-fit: cover; width: 100%;">
+      </div>
+      <div class="col-lg-6 order-lg-1">
+        <h2 class="fw-bold mb-4">Наша история</h2>
+        <p class="lead text-primary">Рожденный в сердце Ванкувера, вдохновленный духом Канады</p>
+        <p class="mb-3">Canadian Maple открыл свои двери в 2018 году в самом сердце Даунтауна Ванкувера. Наш основатель, шеф-повар Майкл Андерсон, вырос в Британской Колумбии и с детства мечтал создать место, которое бы отражало истинную сущность канадского гостеприимства.</p>
+        <p class="mb-3">Вдохновленный богатыми природными ресурсами Западного побережья и культурным разнообразием Ванкувера, Майкл создал меню, где местные продукты встречаются с инновационными кулинарными техниками. Мы гордимся тем, что работаем непосредственно с фермерами из Долины Оканаган, рыбаками с острова Ванкувер и поставщиками из Британской Колумбии.</p>
+        <p class="mb-4">За годы работы мы стали не просто рестораном, а местом, где местные жители и гости города могут ощутить подлинный вкус Западного побережья Канады. От уютных семейных ужинов до деловых встреч - Canadian Maple создает атмосферу, где каждый чувствует себя как дома.</p>
+        <div class="row text-center stats-row">
+          <div class="col-4">
+            <div class="stat-item">
+              <h3 class="text-primary fw-bold display-6">5+</h3>
+              <p class="text-muted mb-0">Лет в Ванкувере</p>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="stat-item">
+              <h3 class="text-primary fw-bold display-6">15K+</h3>
+              <p class="text-muted mb-0">Гостей в год</p>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="stat-item">
+              <h3 class="text-primary fw-bold display-6">95%</h3>
+              <p class="text-muted mb-0">Локальных продуктов</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    {% endfor %}
+  </div>
+</section>
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Наша философия</h2>
+      <p class="lead text-muted">То, что делает нас особенными</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100 values-card">
+          <div class="card-body text-center p-4">
+            <div class="text-primary mb-3">
+              <i class="fas fa-seedling fa-3x"></i>
+            </div>
+            <h5 class="fw-bold">Свежие продукты</h5>
+            <p class="text-muted">Мы работаем только с локальными фермерами и поставщиками, чтобы гарантировать свежесть каждого ингредиента. Ежедневные поставки и строгий контроль качества.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100 values-card">
+          <div class="card-body text-center p-4">
+            <div class="text-primary mb-3">
+              <i class="fas fa-heart fa-3x"></i>
+            </div>
+            <h5 class="fw-bold">С любовью к делу</h5>
+            <p class="text-muted">Каждое блюдо готовится с особой заботой и вниманием. Для нас кулинария - это искусство, а обслуживание - призвание.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100 values-card">
+          <div class="card-body text-center p-4">
+            <div class="text-primary mb-3">
+              <i class="fas fa-users fa-3x"></i>
+            </div>
+            <h5 class="fw-bold">Семейная атмосфера</h5>
+            <p class="text-muted">Мы создаем пространство, где гости чувствуют себя как дома, а сотрудники - как одна большая семья. Ваш комфорт - наш приоритет.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Наша команда</h2>
+      <p class="lead text-muted">Талантливые люди, которые делают ваш вечер особенным</p>
+    </div>
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-6 col-lg-3">
+        <div class="card border-0 shadow-sm text-center team-card h-100">
+          <div class="card-img-wrapper">
+            <img src="{% static 'images/chef1.jpg' %}" class="card-img-top rounded-circle mx-auto mt-4" style="width: 150px; height: 150px; object-fit: cover;" alt="Шеф-повар">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title fw-bold">Сара Джонсон</h5>
+            <p class="text-primary fw-semibold">Шеф-повар</p>
+            <p class="small text-muted">Опыт работы 12 лет. Создает авторские блюда, вдохновленные канадской и европейской кухней. Выпускница Le Cordon Bleu.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="card border-0 shadow-sm text-center team-card h-100">
+          <div class="card-img-wrapper">
+            <img src="{% static 'images/chef2.jpg' %}" class="card-img-top rounded-circle mx-auto mt-4" style="width: 150px; height: 150px; object-fit: cover;" alt="Су-шеф">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title fw-bold">Майкл Родригес</h5>
+            <p class="text-primary fw-semibold">Су-шеф</p>
+            <p class="small text-muted">Специалист по мясным блюдам и грилю. Призер международных кулинарных конкурсов. Опыт работы 8 лет.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="card border-0 shadow-sm text-center team-card h-100">
+          <div class="card-img-wrapper">
+            <img src="{% static 'images/manager.jpg' %}" class="card-img-top rounded-circle mx-auto mt-4" style="width: 150px; height: 150px; object-fit: cover;" alt="Менеджер">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title fw-bold">Эмили Паркер</h5>
+            <p class="text-primary fw-semibold">Менеджер</p>
+            <p class="small text-muted">Обеспечивает безупречный сервис и заботится о комфорте каждого гостя. Работает с нами с момента открытия.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="card border-0 shadow-sm text-center team-card h-100">
+          <div class="card-img-wrapper">
+            <img src="{% static 'images/sommelier.jpg' %}" class="card-img-top rounded-circle mx-auto mt-4" style="width: 150px; height: 150px; object-fit: cover;" alt="Сомелье">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title fw-bold">Дэвид Чен</h5>
+            <p class="text-primary fw-semibold">Сомелье</p>
+            <p class="small text-muted">Поможет подобрать идеальное вино к вашему блюду из нашей обширной винной карты. Сертифицированный эксперт.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Наша галерея</h2>
+      <p class="lead text-muted">Убедитесь в нашей атмосфере</p>
+    </div>
+    <div class="row g-4">
+      {% for img in about_images %}
+      <div class="col-12 col-sm-6 col-lg-4">
+        <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="{% static img %}"
+           class="d-block gallery-item text-decoration-none">
+          <div class="card border-0 shadow-sm h-100 gallery-card">
+            <img src="{% static img %}" class="card-img-top"
+                 style="height: 250px; object-fit: cover; width: 100%;"
+                 alt="Фото ресторана {{ forloop.counter }}">
+            <div class="card-body text-center py-3">
+              <small class="text-muted">Нажмите для увеличения</small>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<section class="py-5 bg-primary text-white">
+  <div class="container">
+    <div class="row justify-content-center text-center">
+      <div class="col-lg-8">
+        <h2 class="fw-bold mb-4">Готовы попробовать?</h2>
+        <p class="lead mb-4">Забронируйте стол онлайн и убедитесь в нашем качестве лично</p>
+        <a href="{% url 'reservations:reservation' %}" class="btn btn-light btn-lg px-5 py-3 fw-bold">
+          Забронировать стол сейчас
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="modal fade" id="imageModal" tabindex="-1">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content border-0 bg-transparent">
+      <div class="modal-header border-0 pb-0">
+        <button type="button" class="btn-close btn-close-white bg-dark rounded-circle p-2" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-center p-0">
+        <img src="" id="modalImage" class="img-fluid rounded-3 shadow-lg" style="max-height: 80vh; object-fit: contain;" alt="">
+      </div>
+    </div>
   </div>
 </div>
 
+<style>
+.hero-section {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
 
+.values-card:hover, .team-card:hover, .gallery-card:hover {
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+}
 
+.values-card, .team-card, .gallery-card {
+  transition: all 0.3s ease;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.stat-item {
+  padding: 20px 0;
+}
+
+.stats-row .col-4 {
+  border-right: 1px solid #e9ecef;
+}
+
+.stats-row .col-4:last-child {
+  border-right: none;
+}
+
+.gallery-item:hover .gallery-card {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1) !important;
+}
+
+.gallery-card img {
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .gallery-card img {
+  transform: scale(1.08);
+}
+
+.card-img-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.team-card .card-img-top {
+  transition: transform 0.3s ease;
+}
+
+.team-card:hover .card-img-top {
+  transform: scale(1.1);
+}
+
+.values-card, .team-card, .gallery-card {
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.values-card:nth-child(1) { animation-delay: 0.1s; }
+.values-card:nth-child(2) { animation-delay: 0.2s; }
+.values-card:nth-child(3) { animation-delay: 0.3s; }
+
+.team-card:nth-child(1) { animation-delay: 0.1s; }
+.team-card:nth-child(2) { animation-delay: 0.2s; }
+.team-card:nth-child(3) { animation-delay: 0.3s; }
+.team-card:nth-child(4) { animation-delay: 0.4s; }
+
+.gallery-card:nth-child(1) { animation-delay: 0.1s; }
+.gallery-card:nth-child(2) { animation-delay: 0.2s; }
+.gallery-card:nth-child(3) { animation-delay: 0.3s; }
+.gallery-card:nth-child(4) { animation-delay: 0.4s; }
+.gallery-card:nth-child(5) { animation-delay: 0.5s; }
+.gallery-card:nth-child(6) { animation-delay: 0.6s; }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var imageModal = document.getElementById('imageModal');
+  imageModal.addEventListener('show.bs.modal', function(event) {
+    var button = event.relatedTarget;
+    var imageSrc = button.getAttribute('data-img');
+    var modalImage = document.getElementById('modalImage');
+    modalImage.src = imageSrc;
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+});
+</script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 {% endblock %}
-
-
-
-
