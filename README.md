@@ -57,12 +57,63 @@ canada_restoran/
 ### Локальная разработка
 
 1. **Клонирование репозитория**
-```bash
-git clone <repository-url>
+git clone [<repository-url>](https://github.com/yuriy0770/vancouver_restoran.git)
 cd canada_restoran
 
-## Установка зависимостей через Poetry
-poetry install
+## 📊 Тестирование
+# Все тесты
+python manage.py test
+
+# С покрытием кода
+coverage run --source='.' manage.py test
+coverage html -d report
+
+Структура тестов
+res/tests.py - тесты главных страниц
+reservations/tests.py - тесты бронирований
+users/tests.py - тесты пользователей
+
+## ⚙️ Настройка админ-панели
+Войдите в админ-панель: /admin
+Управляйте:
+Бронированиями
+Пользователями
+Столиками
+Контентом сайта
+
+## 🔧 Основные модели
+Reservation
+Пользователь, столик, дата/время
+Статусы: pending, confirmed, cancelled
+Автоматические уведомления в Telegram
+
+Table
+Номер, количество мест, описание
+Статус активности
+CustomUser
+Email-аутентификация
+Кастомные поля профиля
+
+## 📱 Особенности реализации
+Адаптивный дизайн - Bootstrap 5
+Безопасность - CSRF защита, кастомная аутентификация
+Производительность - оптимизированные запросы к БД
+Масштабируемость - модульная архитектура
+Code quality - flake8, тесты, типиззация
+
+
+## 🐛 Troubleshooting
+Common Issues
+Ошибка подключения к БД
+Проверьте настройки PostgreSQL
+Убедитесь что база данных создана
+Статические файлы не загружаются
+Выполните python manage.py collectstatic
+Проверьте настройки STATIC_ROOT
+Проблемы с Docker
+Очистите кэш: docker system prune
+Пересоберите образы: docker-compose build --no-cache
+
 
 
 
