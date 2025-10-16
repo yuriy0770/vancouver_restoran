@@ -57,7 +57,7 @@ canada_restoran/
 ### Локальная разработка
 
 1. **Клонирование репозитория**
-git clone [<repository-url>](https://github.com/yuriy0770/vancouver_restoran.git)
+git clone https://github.com/yuriy0770/vancouver_restoran.git
 cd canada_restoran
 
 ## 📊 Тестирование
