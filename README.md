@@ -28,14 +28,15 @@
 
 
 
+
 ## 🚀 Быстрый старт
 
 ### Локальная разработка
 
 1. **Клонирование репозитория**
+```bash
 git clone https://github.com/yuriy0770/vancouver_restoran.git
 cd vancouver_restoran
-
 ## 📊 Тестирование
 # Все тесты
 python manage.py test
