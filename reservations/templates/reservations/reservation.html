@@ -9,14 +9,13 @@
 
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <!-- Сообщения -->
             {% if messages %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                        {{ message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
-                {% endfor %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            {% endfor %}
             {% endif %}
 
             <div class="card shadow">
@@ -27,20 +26,19 @@
                     <form method="post" novalidate>
                         {% csrf_token %}
 
-                        <!-- Основные поля -->
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">{{ form.customer_name.label }}</label>
                                 {{ form.customer_name }}
                                 {% if form.customer_name.errors %}
-                                    <div class="text-danger small">{{ form.customer_name.errors }}</div>
+                                <div class="text-danger small">{{ form.customer_name.errors }}</div>
                                 {% endif %}
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">{{ form.customer_phone.label }}</label>
                                 {{ form.customer_phone }}
                                 {% if form.customer_phone.errors %}
-                                    <div class="text-danger small">{{ form.customer_phone.errors }}</div>
+                                <div class="text-danger small">{{ form.customer_phone.errors }}</div>
                                 {% endif %}
                             </div>
                         </div>
@@ -49,7 +47,7 @@
                             <label class="form-label">{{ form.customer_email.label }}</label>
                             {{ form.customer_email }}
                             {% if form.customer_email.errors %}
-                                <div class="text-danger small">{{ form.customer_email.errors }}</div>
+                            <div class="text-danger small">{{ form.customer_email.errors }}</div>
                             {% endif %}
                         </div>
 
@@ -58,21 +56,21 @@
                                 <label class="form-label">{{ form.reservation_date.label }}</label>
                                 {{ form.reservation_date }}
                                 {% if form.reservation_date.errors %}
-                                    <div class="text-danger small">{{ form.reservation_date.errors }}</div>
+                                <div class="text-danger small">{{ form.reservation_date.errors }}</div>
                                 {% endif %}
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label class="form-label">{{ form.reservation_time.label }}</label>
                                 {{ form.reservation_time }}
                                 {% if form.reservation_time.errors %}
-                                    <div class="text-danger small">{{ form.reservation_time.errors }}</div>
+                                <div class="text-danger small">{{ form.reservation_time.errors }}</div>
                                 {% endif %}
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label class="form-label">{{ form.guests_count.label }}</label>
                                 {{ form.guests_count }}
                                 {% if form.guests_count.errors %}
-                                    <div class="text-danger small">{{ form.guests_count.errors }}</div>
+                                <div class="text-danger small">{{ form.guests_count.errors }}</div>
                                 {% endif %}
                             </div>
                         </div>
@@ -81,7 +79,7 @@
                             <label class="form-label">{{ form.table.label }}</label>
                             {{ form.table }}
                             {% if form.table.errors %}
-                                <div class="text-danger small">{{ form.table.errors }}</div>
+                            <div class="text-danger small">{{ form.table.errors }}</div>
                             {% endif %}
                         </div>
 
@@ -96,21 +94,20 @@
                     </form>
                 </div>
             </div>
-
-            <!-- Информация о столах -->
             <div class="mt-4">
-                <h5>Наши столы:</h5>
+                <h5>🟢 Свободные столы:</h5>
                 <div class="row">
                     {% for table in available_tables %}
                     <div class="col-md-4 mb-3">
-                        <div class="card h-100">
+                        <div class="card h-100 border-success">
                             <div class="card-body">
                                 <h6 class="card-title">Стол #{{ table.number }}</h6>
                                 <p class="card-text">
                                     <i class="fas fa-users"></i> {{ table.seats }} мест
                                 </p>
+                                <span class="badge bg-success">✅ Свободен</span>
                                 {% if table.description %}
-                                    <p class="card-text small text-muted">{{ table.description }}</p>
+                                <p class="card-text small text-muted">{{ table.description }}</p>
                                 {% endif %}
                             </div>
                         </div>
@@ -118,13 +115,59 @@
                     {% empty %}
                     <div class="col-12">
                         <div class="alert alert-warning">
-                            Нет доступных столов для бронирования.
+                            На данный момент нет свободных столов.
                         </div>
                     </div>
                     {% endfor %}
                 </div>
             </div>
+            {% if booked_tables %}
+            <div class="mt-4">
+                <h5>🔴 Занятые столы:</h5>
+                <div class="row">
+                    {% for table in booked_tables %}
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100 border-danger">
+                            <div class="card-body">
+                                <h6 class="card-title">Стол #{{ table.number }}</h6>
+                                <p class="card-text">
+                                    <i class="fas fa-users"></i> {{ table.seats }} мест
+                                </p>
+                                <span class="badge bg-danger">❌ Занят</span>
+                                {% if table.description %}
+                                <p class="card-text small text-muted">{{ table.description }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const dateField = document.getElementById('id_reservation_date');
+        const timeField = document.getElementById('id_reservation_time');
+        const tableField = document.getElementById('id_table');
+
+        function updateAvailableTables() {
+            const date = dateField.value;
+            const time = timeField.value;
+
+            if (date && time) {
+                console.log('Обновление доступных столов для:', date, time);
+
+                if (tableField.options.length === 0) {
+                    alert('На выбранные дату и время нет свободных столов. Выберите другое время.');
+                }
+            }
+        }
+
+        dateField.addEventListener('change', updateAvailableTables);
+        timeField.addEventListener('change', updateAvailableTables);
+    });
+</script>
 {% endblock %}
