@@ -26,29 +26,7 @@
 - **Деплой**: Gunicorn (готово для продакшена)
 - **Уведомления**: Telegram бот
 
-## 📁 Структура проекта
-canada_restoran/
-├── config/ # Настройки Django
-├── res/ # Главное приложение
-│ ├── templates/res/ # Шаблоны главных страниц
-│ ├── tests.py # Тесты главного приложения
-│ └── views.py # Представления
-├── reservations/ # Приложение бронирований
-│ ├── models.py # Модели Reservation, Table
-│ ├── views.py # Логика бронирования
-│ ├── telegram_bot.py # Уведомления в Telegram
-│ └── tests.py # Тесты бронирований
-├── users/ # Приложение пользователей
-│ ├── models.py # Кастомная модель User
-│ ├── forms.py # Формы регистрации/авторизации
-│ └── tests.py # Тесты пользователей
-├── templates/ # Общие шаблоны
-├── static/ # Статические файлы
-├── media/ # Медиа файлы
-├── report/ # Отчеты о покрытии тестами
-├── Dockerfile # Конфигурация Docker
-├── docker-compose.yml # Оркестрация контейнеров
-├── pyproject.toml # Зависимости Poetry
+
 
 ## 🚀 Быстрый старт
 
@@ -56,7 +34,7 @@ canada_restoran/
 
 1. **Клонирование репозитория**
 git clone https://github.com/yuriy0770/vancouver_restoran.git
-cd canada_restoran
+cd vancouver_restoran
 
 ## 📊 Тестирование
 # Все тесты
