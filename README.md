@@ -49,8 +49,6 @@ canada_restoran/
 ├── Dockerfile # Конфигурация Docker
 ├── docker-compose.yml # Оркестрация контейнеров
 ├── pyproject.toml # Зависимости Poetry
-├── .flake8 # Конфигурация линтера
-└── manage.py # Точка входа Django
 
 ## 🚀 Быстрый старт
 
